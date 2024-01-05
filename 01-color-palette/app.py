@@ -17,7 +17,6 @@ def get_colors(msg):
     Desired Format: a JSON array of hexadecimal color codes
 
     Text: {msg}
-    Result:
     """
 
     completion = client.chat.completions.create(
