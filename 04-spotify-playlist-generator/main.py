@@ -7,6 +7,7 @@ import spotipy
 from dotenv import load_dotenv
 from openai import OpenAI
 
+
 def bold(text):
     bold_start = "\033[1m"
     bold_end = "\033[0m"
@@ -14,12 +15,21 @@ def bold(text):
 
 
 def get_playlist(prompt, count=10):
+    example_json = """
+    [
+      {"song": "Everybody Hurts", "artist": "R.E.M."},
+      {"song": "Hurt", "artist": "Johnny Cash"},
+      {"song": "Yesterday", "artist": "The Beatles"}
+    ]
+    """
     messages = [
         {"role": "system", "content": """You are a helpful playlist generating assistant. 
         You should generate a list of songs and their artists according to a text prompt.
         Your should return a JSON array, where each element follows this format: {"song": <song_title>, "artist": <artist_name>}
         """
          },
+        {"role": "user", "content": "Generate a playlist of 3 songs based on this prompt: sad songs"},
+        {"role": "assistant", "content": example_json},
         {"role": "user", "content": f"Generate a playlist of {
             count} songs based on this prompt: {prompt}"},
     ]
